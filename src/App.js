@@ -5,13 +5,14 @@ import Head from './components/head'
 import Content from './components/content'
 import SideBar from './components/side'
 import {MDBContainer} from 'mdbreact'
-
+import ColorBar from './components/colorbar'
 function App() {
   return (
     <div className="app">
         <Head />
       <div className="row"> 
           <SideBar />
+          <ColorBar />
           <Content /> 
       </div>
     </div> 
