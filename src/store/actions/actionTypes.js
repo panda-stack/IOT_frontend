@@ -1,0 +1,3 @@
+export const SHOW_CAPACITY = 'SHOW_CAPACITY'
+export const SHOW_LOADING = 'SHOW_LOADING'
+export const SHOW_CHRONOLOGY = 'SHOW_CHRONOLOGY'

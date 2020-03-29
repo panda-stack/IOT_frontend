@@ -9,10 +9,18 @@ function Head() {
 
 
     const [show, setShow] = useState(false);
+    const [username, setUsername] = useState('');
+    const [buildingName,setbuildingName] = useState('Select Building');
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const fileUpload = () => {
 
+    }
+    const onChangeHandler = (e) => {
+        setUsername(e.target.value)
+    }
+    const onDropdownChange =(e) =>{
+        setbuildingName(e.target.text)
     }
     return (
         <div className="Header">
@@ -22,17 +30,17 @@ function Head() {
                         <Nav.Link href="#">
                             <div className="row">
                                 <img src={loc_icon} style={{ width: "30px" }} />
-                                <NavDropdown title="Choose Comany Building" id="collasible-nav-dropdown">
-                                    <NavDropdown.Item href="#">Factory</NavDropdown.Item>
-                                    <NavDropdown.Item href="#">Hotel</NavDropdown.Item>
-                                    <NavDropdown.Item href="#">Hospital</NavDropdown.Item>
+                                <NavDropdown title={buildingName} >
+                                    <NavDropdown.Item onClick={onDropdownChange}>Quebec Warehouse</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={onDropdownChange}>Levis Distribution Center</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={onDropdownChange}>Beauce Factory</NavDropdown.Item>
                                 </NavDropdown>
                             </div>
                         </Nav.Link>
                     </Nav>
                     <Nav className="ml-auto">
                         <Nav.Link href="#">
-                            John Doe
+                            User: {username}
                             </Nav.Link>
                         <Nav.Link href="#">
                             <img src={gear_icon} style={{ width: "30px" }} onClick={handleShow} />
@@ -47,10 +55,10 @@ function Head() {
                 <Modal.Header closeButton>
                     <Modal.Title>Settings</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Name: <input type="text"></input></Modal.Body>
+                <Modal.Body>Name: <input type="text" onChange={onChangeHandler} value={username} ></input></Modal.Body>
                 <Modal.Footer>
                     <div>
-                        <input id="fileButton" type="file" hidden />
+                        <input id="fileButton" type="file" />
                         <Button variant="secondary" onClick={fileUpload}>
                          <i class="fa fa-upload" aria-hidden="true"></i>
                         </Button>
@@ -62,6 +70,5 @@ function Head() {
         </div >
 
     )
-
 }
 export default Head
