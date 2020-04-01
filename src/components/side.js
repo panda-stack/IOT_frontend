@@ -54,17 +54,16 @@ class SideBar extends Component {
                     <div className="col-md-6 col-sm-6" style={{ marginTop: "10px" }}>
                         <i class="fas fa-phone-alt" style={{ fontSize: "2vw" }} />
                     </div>
-                    <div className="col-md-2 col-sm-2" style={{ marginTop: "10px" }}>
-                    </div>
+                   
                     <div className="col-md-4 col-sm-4" style={{ marginTop: "5px" }}>
                         <img src={net_icon} style={{ width: "40px" }} />
                     </div>
                 </div>
-                <div style={{maxHeight:"150px"}}>
+                <div style={{maxHeight:"100"}}>
                     <ReactSpeedometer
                             ringWidth={10}
-                            width={180}
-                            height={150}
+                            width={150}
+                            height={90}
                             needleHeightRatio={0.7}
                             segmentColors={['#ff6d6a', '#fec359', '#76c175', '#54a0fe']}
                             needleTransition="easeElastic"

@@ -30,7 +30,6 @@
   border-color: black;
   border-width: 2px;
   width: 80%;
- 
   position: relative;
 }
 .ColorBar {
@@ -88,4 +87,18 @@
 .speedmeter {
   max-width: 205px;
   max-height: 110px;
+}
+
+.date-input {
+  border: solid;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+  
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+}
+.date-input :focus {
+  border:solid;
+  border-color: white;
 }
