@@ -7,7 +7,7 @@ class CustomDatePicker extends Component {
     state = {
         currentTime: '',
         maxDate: '',
-        disable:false,
+        disable: false,
     }
     componentDidMount() {
         this.setState({
@@ -15,17 +15,20 @@ class CustomDatePicker extends Component {
             currentTime: this.props.maxDate
         })
     }
+    componentDidUpdate() {
+        if (this.props.onChange) {
+            this.props.onChange(this.state);
+        }
+    }
     decreaseTime = (originTime) => {
         var timeStamp = new Date(originTime).getTime() - 3600000 * 24
         var a = new Date(timeStamp)
         var year = a.getFullYear()
         var month = a.getMonth() + 1;
         var day = a.getDate();
-        var hour = a.getHours();
-        var min = a.getMinutes();
-
-        var time = year + '-' + month + '-' + day + ' ' + hour + ':' + min
-
+        if (month < 10) month = '0' + month
+        if (day<10) day = '0' + day
+        var time = year + '-' + month + '-' + day;
         this.setState({
             currentTime: time
         })
@@ -34,8 +37,8 @@ class CustomDatePicker extends Component {
         if (new Date(originTime) >= new Date(this.state.maxDate)) {
             alert("Not available Date");
             this.setState({
-                currentTime:this.props.maxDate,
-                disable:true
+                currentTime: this.props.maxDate,
+                disable: true
             })
         }
         else {
@@ -44,10 +47,10 @@ class CustomDatePicker extends Component {
             var year = a.getFullYear()
             var month = a.getMonth() + 1;
             var day = a.getDate();
-            var hour = a.getHours();
-            var min = a.getMinutes();
 
-            var time = year + '-' + month + '-' + day + ' ' + hour + ':' + min
+            if (month < 10) month = '0' + month
+            if (day<10) day = '0' + day
+            var time = year + '-' + month + '-' + day;
 
             this.setState({
                 currentTime: time
@@ -67,13 +70,13 @@ class CustomDatePicker extends Component {
 
                 <i class="fas fa-caret-left" style={{ fontSize: "2vw" }} onClick={this.onClickHandleLeft}></i>
                 <input type="text" name="time" className="date-input" value={this.state.currentTime}></input>
-                <i class="fas fa-caret-right" disabled = {this.state.disable}   style={{ fontSize: "2vw" }} onClick={this.onClickHandleRight}></i>
+                <i class="fas fa-caret-right" disabled={this.state.disable} style={{ fontSize: "2vw" }} onClick={this.onClickHandleRight}></i>
             </div>
         )
     }
 }
 const mapStateToProps = (state) => {
-    debugger
+
     return {
         maxDate: state.maxDate
     }
