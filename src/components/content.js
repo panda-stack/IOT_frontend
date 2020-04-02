@@ -7,7 +7,7 @@ import Load from './elements/load'
 
 class Content extends Component{
     render(){
-        
+        console.log(this.props.show_item)
         return(
             <div className="Content" >
                {

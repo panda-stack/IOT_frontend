@@ -60,6 +60,16 @@ const show_success = (state,action) =>{
         maxDate: state.maxDate,
         show_item:1,
         
+        
+    })
+}
+const show_load_success = (state,action) =>{
+    debugger
+    return updateObject(state,{
+        loading:false,
+        img_load_data:action.img_load_data,
+        maxDate: state.maxDate,
+        show_item:2,   
     })
 }
 const show_start = (state,action) =>{
@@ -76,6 +86,7 @@ const reducer = (state=initialState, action) =>{
         case actionTypes.SEND_DATE: return send_date(state,action);
         case actionTypes.SHOW_START: return show_start(state,action);
         case actionTypes.SHOW_SUCCESS: return show_success(state,action);
+        case actionTypes.SHOW_LOAD_SUCCESS: return show_load_success(state,action);
         case actionTypes.UPLOAD_START:return uploadstart(state,action);
         case actionTypes.UPLOAD_SUCCESS:return uploadsuccess(state,action);
         

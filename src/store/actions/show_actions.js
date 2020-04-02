@@ -33,6 +33,15 @@ export const show_success = (img_data) => {
         loading:false
     }
 }
+export const show_load_success = (img_data) => {
+    debugger
+    return {
+        type: actionTypes.SHOW_LOAD_SUCCESS,
+        img_load_data:img_data,
+        loading:false,
+        show_item:2,
+    }
+}
 export const send_date = (max_date) => {
     
     return {
@@ -82,16 +91,34 @@ export const file_upload = (formData) => {
     }
 
 }
+/// Capacity heatmap
 export const show_heatmap = (show_item, date) => {
     
     return dispatch => {
         dispatch(show_start());
-        axios.post('http://127.0.0.1:8000/api/heatmap/', {
+        axios.post('http://127.0.0.1:8000/api/capacity-heatmap/', {
             show_item: show_item,
             date: date
         })
         .then(res => {
             dispatch(show_success(res.data))
+        })
+        .catch(err => {
+            dispatch(show_fail(err))
+        })
+    }
+}
+///Show load Heatmap
+export const show_load_heatmap = (show_item, date) => {
+    
+    return dispatch => {
+        dispatch(show_start());
+        axios.post('http://127.0.0.1:8000/api/load-heatmap/', {
+            show_item: show_item,
+            date: date
+        })
+        .then(res => {
+            dispatch(show_load_success(res.data))
         })
         .catch(err => {
             dispatch(show_fail(err))

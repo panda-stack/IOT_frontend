@@ -21,13 +21,13 @@ class Capacity extends Component {
     render() {
        
         return (
-            <div style={{ textAlign: "center" }}>
-                <div className="row" style={{textAlign:"center"}}>
+            <div className = "capacity" style={{ textAlign: "center" }}>
+                <div>
                     
                     <CustomDatePicker onChange={this.eventhandler}/>
                     {
                         this.props.loading?
-                        <Spinner animation="grow" /> 
+                        <Spinner animation="border" variant="primary" />
                         :
                         <button onClick={this.handleClick}>Draw</button>
                     }
