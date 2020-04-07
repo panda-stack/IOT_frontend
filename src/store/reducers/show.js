@@ -12,7 +12,8 @@ export const updateObject = (oldObject, updatedProperties)=>{
 const initialState = {
   show_item:0,
   loading:false,
-  maxDate:new Date()
+  maxDate:"",
+  sensors:[]
 }
 const show_capacity = (state,action) =>{
     
@@ -72,9 +73,17 @@ const show_load_success = (state,action) =>{
         show_item:2,   
     })
 }
+
 const show_start = (state,action) =>{
     return updateObject(state,{
         loading:true
+    })
+}
+const show_chronology_success = (state,action) =>{
+    return updateObject(state,{
+        chron_data:action.data,
+        loading:action.loading,
+        show_item:action.shoe_item,
     })
 }
 const reducer = (state=initialState, action) =>{
@@ -89,7 +98,7 @@ const reducer = (state=initialState, action) =>{
         case actionTypes.SHOW_LOAD_SUCCESS: return show_load_success(state,action);
         case actionTypes.UPLOAD_START:return uploadstart(state,action);
         case actionTypes.UPLOAD_SUCCESS:return uploadsuccess(state,action);
-        
+        case actionTypes.SHOW_CHRONOLOGY_SUCCESS:return show_chronology_success(state,action);
         default:
             return state;     
     }

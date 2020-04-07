@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CustomDatePicker from './customedatepicker'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/show_actions'
-import {Button,Spinner} from 'react-bootstrap'
+import {Spinner} from 'react-bootstrap'
 
 class Loading extends Component {
     state = {

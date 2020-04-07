@@ -102,3 +102,10 @@
   border:solid;
   border-color: white;
 }
+.gradient-area {
+  height: 100%;
+  background: linear-gradient(to bottom, #ff6d6a 0%,#fec359 33%,#76c175 67%,#54a0fe   100%)
+}
+.recharts-responsive-container {
+  height: 95% !important;
+}

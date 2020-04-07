@@ -34,12 +34,20 @@ export const show_success = (img_data) => {
     }
 }
 export const show_load_success = (img_data) => {
-    debugger
+    
     return {
         type: actionTypes.SHOW_LOAD_SUCCESS,
         img_load_data:img_data,
         loading:false,
         show_item:2,
+    }
+}
+export const show_chronology_success = (data) =>{
+    return {
+        type:actionTypes.SHOW_CHRONOLOGY_SUCCESS,
+        data:data,
+        loading:false,
+        show_item:3
     }
 }
 export const send_date = (max_date) => {
@@ -124,4 +132,24 @@ export const show_load_heatmap = (show_item, date) => {
             dispatch(show_fail(err))
         })
     }
+}
+///Show chronology
+export const show_chronology_graph = (last_week,sensors) => {
+    console.log(sensors,last_week)
+    return dispatch => {
+        dispatch(show_start());
+        axios.post('http://127.0.0.1:8000/api/chronology/', {
+            sensors: sensors,
+            last_week: last_week
+        })
+        .then(res => {
+            var data = res.data.reverse()
+            dispatch(show_chronology_success(data))
+            
+        })
+        .catch(err => {
+            dispatch(show_fail(err))
+        })
+    }
+    
 }

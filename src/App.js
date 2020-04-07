@@ -17,6 +17,7 @@ function App(props) {
           <Head />
         <div className="row" > 
             <SideBar />
+           
             <ColorBar />
             <Content /> 
         </div>
