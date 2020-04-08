@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react'
 import loc_icon from '../assets/location_icon.ico'
 import siren_icon from '../assets/emergency.ico'
 import gear_icon from '../assets/gear.ico'
-import { Navbar, Nav, NavDropdown, Form, Modal, ModalBody, ModalFooter, Button, Spinner } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown,  Modal,  Button, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import * as actions from './../store/actions/show_actions'
 
@@ -88,7 +88,7 @@ class Head extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal show={this.state.show} onHide={this.handleClose} dialogClassName={"UploadModal"}>
                     <Modal.Header closeButton>
                         <Modal.Title>Settings</Modal.Title>
                     </Modal.Header>

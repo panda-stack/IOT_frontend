@@ -13,7 +13,8 @@ const initialState = {
   show_item:0,
   loading:false,
   maxDate:"",
-  sensors:[]
+  sensors:[],
+  maxLoad:0,
 }
 const show_capacity = (state,action) =>{
     
@@ -51,7 +52,9 @@ const uploadstart = (state,action) =>{
 }
 const uploadsuccess = (state,action) => {
     return updateObject(state,{
-        loading:false
+        loading:false,
+        maxDate:action.max_date,
+        maxLoad:action.max_load,
     })
 }
 const show_success = (state,action) =>{
@@ -59,9 +62,7 @@ const show_success = (state,action) =>{
         loading:false,
         img_data:action.img_data,
         maxDate: state.maxDate,
-        show_item:1,
-        
-        
+        show_item:1,    
     })
 }
 const show_load_success = (state,action) =>{
@@ -86,19 +87,26 @@ const show_chronology_success = (state,action) =>{
         show_item:action.shoe_item,
     })
 }
+const show_fail = (state,action) => {
+    return updateObject(state,{
+        loading:action.loading,
+        error:action.error
+    })
+}
 const reducer = (state=initialState, action) =>{
     
     switch(action.type){
         case actionTypes.SHOW_CAPACITY: return show_capacity(state,action);
         case actionTypes.SHOW_LOADING: return show_loading(state,action);
         case actionTypes.SHOW_CHRONOLOGY: return show_chronology(state,action);   
-        case actionTypes.SEND_DATE: return send_date(state,action);
+     
         case actionTypes.SHOW_START: return show_start(state,action);
         case actionTypes.SHOW_SUCCESS: return show_success(state,action);
         case actionTypes.SHOW_LOAD_SUCCESS: return show_load_success(state,action);
         case actionTypes.UPLOAD_START:return uploadstart(state,action);
         case actionTypes.UPLOAD_SUCCESS:return uploadsuccess(state,action);
         case actionTypes.SHOW_CHRONOLOGY_SUCCESS:return show_chronology_success(state,action);
+        case actionTypes.SHOW_FAIL:return show_fail(state,action);
         default:
             return state;     
     }

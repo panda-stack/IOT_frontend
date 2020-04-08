@@ -30,7 +30,7 @@ class Loading extends Component {
                         <button onClick={this.handleClick}>Draw</button>
                     }
                 </div>
-                <img src={`data:image/png;base64,${this.props.img_load_data}`}  style={{width:"750px",height:"480px"}}/>
+                <img src={`data:image/png;base64,${this.props.img_load_data}`}  style={{width:"95%",height:"450px"}}/>
             </div>
        
         )

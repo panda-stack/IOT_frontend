@@ -64,12 +64,17 @@ class CustomDatePicker extends Component {
     onClickHandleRight = (e) => {
         this.increaseTime(this.state.currentTime)
     }
+    handleChange = (e) =>{
+        this.setState({
+            currentTime:e.target.value
+        })
+    }
     render() {
         return (
             <div className="DatePicker">
 
                 <i class="fas fa-caret-left" style={{ fontSize: "2vw" }} onClick={this.onClickHandleLeft}></i>
-                <input type="text" name="time" className="date-input" value={this.state.currentTime}></input>
+                <input type="text" name="time" className="date-input" value={this.state.currentTime} onChange={this.handleChange}></input>
                 <i class="fas fa-caret-right" disabled={this.state.disable} style={{ fontSize: "2vw" }} onClick={this.onClickHandleRight}></i>
             </div>
         )

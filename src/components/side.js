@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { Button, Card } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import ReactSpeedometer from "react-d3-speedometer"
 import net_icon from '../assets/Picture1.png'
 import tensio from '../assets/tensio.jpg'
+import snowman from '../assets/snowman.png'
 import {connect} from 'react-redux';
 
 import * as actions from '../store/actions/show_actions'
 
 class SideBar extends Component {
-    
+        state = {
+            show:false
+        }
         onCapacity = (event) =>{
            console.log("load")
            this.props.Capacity()
@@ -18,6 +21,16 @@ class SideBar extends Component {
         }
         onChronology = (event) =>{
            this.props.Chronology()
+        }
+        handleShow = (e) =>{
+            this.setState({
+                show:true
+            })
+        }
+        handleClose = () => {
+            this.setState({
+                show:false
+            })
         }
        
     render() {
@@ -52,7 +65,7 @@ class SideBar extends Component {
                 </div>
                 <div className="row">
                     <div className="col-md-6 col-sm-6" style={{ marginTop: "10px" }}>
-                        <i class="fas fa-phone-alt" style={{ fontSize: "2vw" }} />
+                        <i class="fas fa-phone-alt" style={{ fontSize: "2vw" }} onClick={this.handleShow}/>
                     </div>
                    
                     <div className="col-md-4 col-sm-4" style={{ marginTop: "5px" }}>
@@ -63,20 +76,30 @@ class SideBar extends Component {
                     <ReactSpeedometer
                             ringWidth={10}
                             width={150}
-                            height={90}
+                            height={120}
+                            minValue = {0}
+                            maxValue = {30000}
                             needleHeightRatio={0.7}
                             segmentColors={['#ff6d6a', '#fec359', '#76c175', '#54a0fe']}
                             needleTransition="easeElastic"
-                            textColor={'#FFF'}
+                            textColor={'#000'}
                             maxSegmentLabels={0}
                             needleColor="#D8DEE9"
-                            value={150}
+                            value={this.props.max_load}      
                         />                
                 </div>
                 <div className="row" style={{alignSelf:"center"}}>
                     <span>Powered by </span><img src={tensio} style={{ width: "30px" }} />
                 </div>
-
+                <Modal show={this.state.show} onHide={this.handleClose} dialogClassName={"CircleModal"} >
+                    <Modal.Header closeButton >
+                        
+                    </Modal.Header>
+                    <Modal.Body style={{textAlign:"center"}} >
+                        <p>Calling the nearest snow remover</p>
+                        <img src={snowman}  />
+                    </Modal.Body>
+                </Modal>
             </div>
 
         )
@@ -90,4 +113,9 @@ const mapDispatchToProps = dispatch => {
     Chronology: () => dispatch(actions.show_chronology)
   }
 }
-export default connect(null,mapDispatchToProps)(SideBar);
+const mapStateToProps = state => {
+    return {
+        max_load:state.maxLoad
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(SideBar);

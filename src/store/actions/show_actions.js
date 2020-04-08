@@ -50,13 +50,7 @@ export const show_chronology_success = (data) =>{
         show_item:3
     }
 }
-export const send_date = (max_date) => {
-    
-    return {
-        type: actionTypes.SEND_DATE,
-        maxDate: max_date
-    }
-}
+
 
 export const upload_start = () =>{
     
@@ -64,10 +58,12 @@ export const upload_start = () =>{
         type:actionTypes.UPLOAD_START
     }
 }
-export const upload_success = () =>{
+export const upload_success = (data) =>{
    
     return {
         type:actionTypes.UPLOAD_SUCCESS,
+        max_date:data[0],
+        max_load:data[1]
     }
 }
 export const show_fail = error => {
@@ -88,13 +84,14 @@ export const file_upload = (formData) => {
             }
         })
         .then(res => {
-           
-            dispatch(send_date(res.data))
-            dispatch(upload_success())
+            
+            
+            dispatch(upload_success(res.data))
         })
         .catch(err => {
+          
+            dispatch(show_fail(err))
             
-            console.log(err)
         })
     }
 

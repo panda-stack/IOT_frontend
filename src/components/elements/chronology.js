@@ -15,6 +15,7 @@ class Chronology extends Component {
     state = {
         show: false,
         sensors: [],
+        numOfdays:10
     }
     handleClick = (e) => {
         this.setState({
@@ -25,15 +26,15 @@ class Chronology extends Component {
         this.setState({
             show: false
         })
-        var maxDate = "2020-03-26"
-        var last_week = this.get_last_days(maxDate)
+        
+        var last_week = this.get_last_days(this.props.maxDate,this.state.numOfdays)
         
         this.props.show_chronology_graph(last_week, this.sensors)
         this.sensors = []
     }
-    get_last_days = (date) => {
+    get_last_days = (date,numberOfdays) => {
         var last_week = []
-        for (var i = 1; i < 10; i++) {
+        for (var i = 1; i < numberOfdays; i++) {
             var timeStamp = new Date(date).getTime() - 3600000 * 24 * i
             var a = new Date(timeStamp)
             var year = a.getFullYear()
@@ -54,15 +55,20 @@ class Chronology extends Component {
         else
             this.sensors.splice(this.sensors.indexOf(e.target.name), 1)
     }
+    handleChange = (e) =>{
+        this.setState({
+            numOfdays:e.target.value
+        })
+        
+    }
     render() {
         return (
-            <div style={{ width: "95 %", height: "500px" }} className="gradient-area">
+            <div style={{ width: "95 %",  }} className="gradient-area">
                 {
                     this.props.loading?
                     <div style={{textAlign:"center" ,width: "95 %", height: "500px" }}>
                      <Spinner animation="border" variant="primary" />
                     </div>
-                    
                     :
                     <ResponsiveContainer >
                     <LineChart
@@ -75,15 +81,15 @@ class Chronology extends Component {
                         <YAxis />
                         <Tooltip />
                         
-                        <CartesianGrid strokeDasharray="0 0" />
-                        <Line connectNulls type="monotone" dataKey="C01" stroke="#000000" fill="#000000" />
-                        <Line connectNulls type="monotone" dataKey="C02" stroke="#000000" fill="#000000"/>
-                        <Line connectNulls type="monotone" dataKey="C03" stroke="#000000" fill="#000000" />
-                        <Line connectNulls type="monotone" dataKey="C04" stroke="#000000"  fill="#000000"/>
-                        <Line connectNulls type="monotone" dataKey="C05" stroke="#000000" fill="#000000" />
-                        <Line connectNulls type="monotone" dataKey="C06" stroke="#000000"  fill="#000000"/>
-                        <Line connectNulls type="monotone" dataKey="C07" stroke="#000000" fill="#000000" />
-                        <Line connectNulls type="monotone" dataKey="C08" stroke="#000000"  fill="#000000"/>
+                        <CartesianGrid strokeDasharray="10 0" />
+                        <Line connectNulls type="monotone" dataKey="C01" stroke="#000000" fill="#000000" unit="lbs"/>
+                        <Line connectNulls type="monotone" dataKey="C02" stroke="#000000" fill="#000000" unit="lbs"/>
+                        <Line connectNulls type="monotone" dataKey="C03" stroke="#000000" fill="#000000" unit="lbs"/>
+                        <Line connectNulls type="monotone" dataKey="C04" stroke="#000000"  fill="#000000"unit="lbs"/>
+                        <Line connectNulls type="monotone" dataKey="C05" stroke="#000000" fill="#000000"  unit="lbs"/>
+                        <Line connectNulls type="monotone" dataKey="C06" stroke="#000000"  fill="#000000" unit="lbs"/>
+                        <Line connectNulls type="monotone" dataKey="C07" stroke="#000000" fill="#000000"  unit="lbs"/>
+                        <Line connectNulls type="monotone" dataKey="C08" stroke="#000000"  fill="#000000"unit="lbs"/>
                         <Line connectNulls type="monotone" dataKey="C09" stroke="#000000" fill="#000000" />
                         <Line connectNulls type="monotone" dataKey="P01" stroke="#000000" fill="#000000" />
                         <Line connectNulls type="monotone" dataKey="P02" stroke="#000000"  fill="#000000"/>
@@ -100,9 +106,11 @@ class Chronology extends Component {
                 <i class="fas fa-filter" style={{ position: "relative", top: "96%", left: "98%" }} onClick={this.handleClick}></i>
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Select the sensors</Modal.Title>
+                        
+                        NumberOfDays:&nbsp;&nbsp; <input type="number" value={this.state.numOfdays} onChange = {this.handleChange}/>
                     </Modal.Header>
                     <Modal.Body>
+                        <p style={{textAlign:"center"}}>Select sensors</p>
                         <div className="row">
                             <div className="col-sm-6">
                                 <span><input name="C01" type="checkbox" onClick={this.handleCheck} />C01</span>
@@ -192,6 +200,7 @@ const mapStateToProps = (state) =>{
         loading:state.loading,
         data:state.chron_data,
         show_item:state.show_item,
+        maxDate:state.maxDate
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Chronology);

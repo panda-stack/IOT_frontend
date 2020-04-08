@@ -109,3 +109,12 @@
 .recharts-responsive-container {
   height: 95% !important;
 }
+.CircleModal{
+  width: 250px !important;
+  height: 250px !important;
+  border-radius: 50% !important;
+}
+
+.UploadModal{
+  width: 100% !important;
+}
