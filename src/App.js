@@ -5,7 +5,9 @@ import Head from './components/head'
 import Content from './components/content'
 import SideBar from './components/side'
 
-import ColorBar from './components/colorbar'
+import CapacityColorBar from './components/capacitycolorbar'
+import LoadColorBar from './components/loadcolorbar'
+import ChronologyColorBar from './components/chronologycolorbar'
 import {connect} from 'react-redux'
 
 
@@ -17,8 +19,16 @@ function App(props) {
           <Head />
         <div className="row" > 
             <SideBar />
-           
-            <ColorBar />
+            {
+                   props.show_item == 1?
+                   <CapacityColorBar />
+                   :
+                   props.show_item == 2?
+                   <LoadColorBar />
+                   :
+                   <ChronologyColorBar />
+            }
+            
             <Content /> 
         </div>
       </div> 
